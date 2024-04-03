@@ -25,4 +25,20 @@ const createNewUser = async ({ name, email, password, employeeId, designation, d
     };
   };
 
-module.exports={getUserByEmail,createNewUser}
+const getUserById=async(id)=>{
+    const user=await Users.findOne({
+        where:{
+            id
+        }
+    })
+    return user
+}
+
+const updateUserById=async(id,payload)=>{
+    const updatedUser=await Users.findByIdAndUpdate(id,payload,{
+        new:true
+    })
+    return updatedUser
+}
+
+module.exports={getUserByEmail,createNewUser,getUserById,updateUserById}
