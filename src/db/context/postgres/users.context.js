@@ -35,9 +35,10 @@ const getUserById=async(id)=>{
 }
 
 const updateUserById=async(id,payload)=>{
-    const updatedUser=await Users.findByIdAndUpdate(id,payload,{
-        new:true
-    })
+    const [updatedRowsCount, [updatedUser]] = await Users.update(payload, {
+        where: { id },
+        returning: true // Return the updated user
+    });
     return updatedUser
 }
 
